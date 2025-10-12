@@ -1,0 +1,26 @@
+server:
+  port: 9090
+
+gateway:
+  api:
+    key: tajnikljuc123
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: users-service
+          uri: lb://users-service
+          predicates:
+            - Path=/api/users/**
+        - id: bookings-service
+          uri: lb://bookings-service
+          predicates:
+            - Path=/api/bookings/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
