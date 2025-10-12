@@ -2,8 +2,6 @@ package com.example.usersservice.controller;
 
 import com.example.usersservice.DTOs.UserCreateDTO;
 import com.example.usersservice.DTOs.UserDTO;
-import com.example.usersservice.model.User;
-import com.example.usersservice.repository.UserRepository;
 import com.example.usersservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

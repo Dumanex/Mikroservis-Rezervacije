@@ -3,7 +3,6 @@ package com.example.bookingsservice.service;
 import com.example.bookingsservice.DTOs.UserDTO;
 import com.example.bookingsservice.clients.UserClient;
 import com.example.bookingsservice.exception.UserNotFoundException;
-import feign.FeignException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
