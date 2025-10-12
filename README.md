@@ -8,6 +8,15 @@ Ovaj projekat predstavlja **mikroservisni sistem za upravljanje rezervacijama** 
 
 Sistem se sastoji od **4 glavna mikroservisa**:
 
+### 📋 Tabela Servisa
+
+| Servis | Port | Rute | Odgovornosti |
+|--------|------|------|--------------|
+| **Discovery Service** | 8761 | `/eureka/*` | • Centralni registar servisa<br>• Service Discovery<br>• Health monitoring servisa |
+| **API Gateway** | 9090 | `/api/users/*`<br>`/api/bookings/*` | • Jedinstvena tačka ulaza<br>• Rutiranje zahteva<br>• Load balancing<br>• API ključ autentifikacija |
+| **Users Service** | 9190 | `/api/users/*` | • CRUD operacije za korisnike<br>• Validacija podataka<br>• H2 baza podataka |
+| **Bookings Service** | 9191 | `/api/bookings/*` | • CRUD operacije za rezervacije<br>• Komunikacija sa Users Service<br>• Circuit Breaker pattern<br>• Retry mechanism |
+
 ### 1. **Discovery Service** (Eureka Server)
 - **Port:** 8761
 - **Funkcija:** Centralni registar servisa koji omogućava automatsko otkrivanje i registraciju mikroservisa
