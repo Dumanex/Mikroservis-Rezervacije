@@ -17,6 +17,58 @@ Sistem se sastoji od **4 glavna mikroservisa**:
 | **Users Service** | 9190 | `/api/users/*` | • CRUD operacije za korisnike<br>• Validacija podataka<br>• H2 baza podataka |
 | **Bookings Service** | 9191 | `/api/bookings/*` | • CRUD operacije za rezervacije<br>• Komunikacija sa Users Service<br>• Circuit Breaker pattern<br>• Retry mechanism |
 
+### 🎨 Dijagram Komponenti
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        Client[Klijent]
+    end
+    
+    subgraph "Gateway Layer"
+        Gateway[API Gateway<br/>Spring Cloud Gateway<br/>Port: 9090]
+    end
+    
+    subgraph "Service Discovery"
+        Discovery[Discovery Service<br/>Eureka Server<br/>Port: 8761]
+    end
+    
+    subgraph "Business Services"
+        Users[Users Service<br/>Port: 9190]
+        Bookings[Bookings Service<br/>Port: 9191]
+    end
+    
+    subgraph "Data Layer"
+        UsersDB[(H2 Database<br/>Users)]
+        BookingsDB[(H2 Database<br/>Bookings)]
+    end
+    
+    Client -->|HTTP Requests<br/>/api/users/*<br/>/api/bookings/*| Gateway
+    Gateway -->|Service Registration| Discovery
+    Gateway -->|Route /api/users/*| Users
+    Gateway -->|Route /api/bookings/*| Bookings
+    Users -->|Service Registration| Discovery
+    Bookings -->|Service Registration| Discovery
+    Bookings -->|Feign Client<br/>Get User Details| Users
+    Users -->|JPA/Hibernate| UsersDB
+    Bookings -->|JPA/Hibernate| BookingsDB
+    
+    classDef gateway fill:#90EE90,color:#000000
+    classDef discovery fill:#87CEEB,color:#000000
+    classDef users fill:#FFFFE0,color:#000000
+    classDef bookings fill:#F0E68C,color:#000000
+    classDef database fill:#D3D3D3,color:#000000
+    classDef subgraphLabel fill:#ffffff,color:#000000
+    
+    class Gateway gateway
+    class Discovery discovery
+    class Users users
+    class Bookings bookings
+    class UsersDB,BookingsDB database
+    
+    linkStyle default color:#000000
+```
+
 ### 1. **Discovery Service** (Eureka Server)
 - **Port:** 8761
 - **Funkcija:** Centralni registar servisa koji omogućava automatsko otkrivanje i registraciju mikroservisa
