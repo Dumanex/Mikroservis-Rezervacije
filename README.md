@@ -191,30 +191,3 @@ curl -X POST http://localhost:9090/api/bookings \
     "details": "Rezervacija za restoran"
   }'
 ```
-
-## 📝 Napomene
-
-- **H2 baze podataka** se resetuju pri svakom pokretanju servisa
-- **Service Discovery** omogućava automatsko otkrivanje servisa
-- **API Gateway** centralizuje pristup svim servisima
-- **Circuit Breaker** štiti od kaskadnih grešaka
-- **Feign Client** omogućava komunikaciju između servisa
-
-## 🔍 Troubleshooting
-
-### Česti problemi:
-1. **Servisi se ne registruju u Eureka**
-   - Proverite da li je Discovery Service pokrenut
-   - Čekajte dovoljno vremena za registraciju (30-60 sekundi)
-
-2. **API Gateway ne rutira zahteve**
-   - Proverite da li su svi servisi registrovani u Eureka
-   - Proverite konfiguraciju rutiranja u application.yml
-
-3. **H2 Console nije dostupna**
-   - Proverite da li je `spring.h2.console.enabled=true` u konfiguraciji
-   - Koristite tačan JDBC URL za svaki servis
-
----
-
-**Napomena:** Ovaj sistem je dizajniran za razvoj i testiranje. Za produkciju bi trebalo implementirati dodatne sigurnosne mere, persistant bazu podataka i monitoring.
