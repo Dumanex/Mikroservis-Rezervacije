@@ -108,6 +108,15 @@ graph TB
 - **OpenFeign** - HTTP client za komunikaciju između servisa
 - **Maven** - Dependency management
 
+## 📋 Kratka dokumentacija
+**Obavezni deo:**
+- Mikroservisna arhitektura (Eureka + Gateway + REST servisi)
+- Komunikacija između **Users-service** i **Bookings-service**
+- Centralizovano rutiranje kroz **API Gateway**
+
+**Bonus deo**
+- Jednostavna autentifikacija na gateway-u (API key filter)
+
 ## 📊 Struktura Podataka
 
 ### User Entity
